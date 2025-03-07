@@ -27,11 +27,10 @@ def login_post():
 		return redirect("/success")
 	else:
 		return redirect("/login?stape=fail")
+	
 @app.route("/success")
 def success():
 	return render_template("success.html")
-
-
 
 
 

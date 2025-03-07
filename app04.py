@@ -1,7 +1,7 @@
 # 1.로그인 2. 숫자 2개 입력 3덧셈 4 결과
 from flask import Flask, request,redirect, render_template
 app = Flask(__name__)
-hap=0
+# hap=0
 @app.route("/login", methods=['get'])
 def longin_get():
 	state= request.args.get("state",None)
@@ -21,16 +21,19 @@ def login_post():
 def success_get():
 	return render_template("success2.html")
 
+
 @app.route("/success", methods=['post'])
 def success_post():
-	global hap
+	# global hap
 	value = int(request.form.get('value'))
 	value2 =int(request.form.get('value2'))
 	hap =  value+ value2
-	return redirect("/result")
+	# 새로운 작업으로 보낸다
+	return redirect(f"/result?hap={hap}")
 
 @app.route('/result')
 def result():
+	hap = request.args.get('hap')
 	return render_template("result2.html",hap=hap)
 
 app.run(debug=True)
